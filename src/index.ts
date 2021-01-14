@@ -1,7 +1,7 @@
 import { execSync, exec } from "child_process"
 import webpack from "./modules/webpack"
-const figlet = require("figlet")
-const clear = require("clear")
+import figlet from "figlet"
+import clear from "clear"
 import { check } from "./modules/fs"
 import babel from "./modules/babel"
 import readline from "readline"
