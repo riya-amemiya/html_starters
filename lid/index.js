@@ -4,6 +4,10 @@ var _child_process = require("child_process");
 
 var _webpack = _interopRequireDefault(require("./modules/webpack"));
 
+var _figlet = _interopRequireDefault(require("figlet"));
+
+var _clear = _interopRequireDefault(require("clear"));
+
 var _fs = require("./modules/fs");
 
 var _babel = _interopRequireDefault(require("./modules/babel"));
@@ -22,11 +26,7 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var figlet = require("figlet");
-
-var clear = require("clear");
-
-clear();
+(0, _clear["default"])();
 
 var rl = _readline["default"].createInterface({
   input: process.stdin,
@@ -39,7 +39,7 @@ rl.question("プロジェクトの名前を入力してください:", function 
   console.log("Thank you!! start ".concat(a));
 
   if (!(0, _fs.check)(a)) {
-    figlet("HTMLSTARTER", function (err, data) {
+    (0, _figlet["default"])("HTMLSTARTER", function (err, data) {
       if (err) console.log(err);
       console.log(data);
     });
@@ -63,7 +63,7 @@ rl.question("プロジェクトの名前を入力してください:", function 
           if (iterator === "html") {
             template = "\n<!DOCTYPE html>\n<html lang=\"ja\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Hello</title>\n</head>\n\n<body>\n    <h1>Hello</h1>\n</body>\n\n</html>";
           } else if (iterator === "js") {
-            template = "console.log('Hello')";
+            template = "\nimport '../css/index.css'\nconsole.log('Hello')";
           } else if (iterator === "css") {
             template = "\nbody {\n    text-align: center;\n}";
           }

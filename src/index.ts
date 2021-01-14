@@ -54,7 +54,9 @@ rl.question("プロジェクトの名前を入力してください:", (a: strin
                 }
                 else if (iterator === "js")
                 {
-                    template = "console.log('Hello')"
+                    template = `
+import '../css/index.css'
+console.log('Hello')`
                 }
                 else if (iterator === "css")
                 {
