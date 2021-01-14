@@ -1,6 +1,6 @@
 {
     "name": "html_starters",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "description": "",
     "main": "lid/index.js",
     "scripts": {
