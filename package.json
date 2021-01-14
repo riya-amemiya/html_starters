@@ -1,0 +1,32 @@
+{
+    "name": "html_starters",
+    "version": "1.0.0",
+    "description": "",
+    "main": "lid/index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "typescript": "tsc --build tsconfig.json",
+        "build": "npm run typescript && babel src --extensions '.ts,.tsx' --out-dir lid"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "cac": "^6.7.1",
+        "tslib": "^2.1.0"
+    },
+    "devDependencies": {
+        "@babel/cli": "^7.12.10",
+        "@babel/core": "^7.12.10",
+        "@babel/preset-env": "^7.12.11",
+        "@babel/preset-react": "^7.12.10",
+        "@babel/preset-typescript": "^7.12.7",
+        "@types/clear": "^0.1.1",
+        "@types/figlet": "^1.2.1",
+        "clear": "^0.1.0",
+        "figlet": "^1.5.0"
+    },
+    "bin": {
+        "html_starters": "./bin/cli.js"
+    }
+}
