@@ -1,6 +1,17 @@
 import fs from 'fs';
-export function check(file: string): boolean
+import path from "path"
+function read(file: string): string
 {
+    file = path.resolve(file)
+    if (check(file))
+    {
+        return fs.readFileSync(file, 'utf8');
+    }
+    return "";
+}
+function check(file: string): boolean
+{
+    file = path.resolve(file)
     let hasfaile = false;
     try
     {
@@ -11,4 +22,9 @@ export function check(file: string): boolean
         hasfaile = false;
     }
     return hasfaile;
+}
+export
+{
+    read,
+    check
 }

@@ -6,7 +6,8 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "typescript": "tsc --build tsconfig.json",
-        "build": "npm run typescript && babel src --extensions '.ts,.tsx' --out-dir lid"
+        "build": "npm run typescript && babel src --extensions '.ts,.tsx' --out-dir lid",
+        "deploy": "npm version patch && npm publish ./ "
     },
     "keywords": [],
     "author": "",

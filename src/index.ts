@@ -2,17 +2,19 @@ import { execSync, exec } from "child_process"
 import webpack from "./modules/webpack"
 import figlet from "figlet"
 import clear from "clear"
-import { check } from "./modules/fs"
+import { check, read } from "./modules/fs"
 import babel from "./modules/babel"
 import readline from "readline"
 import path from "path"
 import pack from "./modules/package"
+import * as type from "./type/type"
 clear()
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 })
-const fortnite = ["js", "html", "css", "img"]
+const config: type.RootObject = JSON.parse(read("html_starters.config.json"))
+const fortnite = config?.DuildFileType || ["js", "html", "css", "img"]
 let template: string = ""
 rl.question("プロジェクトの名前を入力してください:", (a: string): void =>
 {

@@ -33,7 +33,8 @@ var rl = _readline["default"].createInterface({
   output: process.stdout
 });
 
-var fortnite = ["js", "html", "css", "img"];
+var config = JSON.parse((0, _fs.read)("html_starters.config.json"));
+var fortnite = (config === null || config === void 0 ? void 0 : config.DuildFileType) || ["js", "html", "css", "img"];
 var template = "";
 rl.question("プロジェクトの名前を入力してください:", function (a) {
   console.log("Thank you!! start ".concat(a));
