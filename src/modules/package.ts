@@ -9,7 +9,7 @@ const pack = (name: string) =>
     "main": "index.js",
     "scripts": {
         "test": "echo \\\"Error: no test specified\\\" && exit 1",
-        "build": "webpack --config webpack.config.js --display-used-exports",
+        "build": "tsc --build tsconfig && webpack --config webpack.config.js --display-used-exports",
         "buildtest": "webpack --config webpack.config.js --display-used-exports",
         "publish-demo": "npm run build && npm run deploy",
         "server": "webpack-dev-server --config webpack.config.js --open",

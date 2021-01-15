@@ -13,7 +13,41 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-var _default = function _default(fortnite, file) {
+function ts(tsoption) {
+  var ts = {
+    include: ["src/**/*"],
+    compilerOptions: {
+      outDir: "".concat(tsoption.compilerOptions.outDir || "tsbuild"),
+      target: "ES2017",
+      module: "esnext",
+      jsx: "react",
+      alwaysStrict: true,
+      noEmit: true,
+      removeComments: false,
+      sourceMap: true,
+      declaration: true,
+      declarationMap: true,
+      importHelpers: true,
+      incremental: true,
+      strictBindCallApply: true,
+      noImplicitAny: true,
+      noUnusedLocals: true,
+      noUnusedParameters: true,
+      strictNullChecks: true,
+      noFallthroughCasesInSwitch: true,
+      forceConsistentCasingInFileNames: true,
+      strictFunctionTypes: true,
+      strictPropertyInitialization: true,
+      esModuleInterop: true,
+      allowSyntheticDefaultImports: true,
+      moduleResolution: "node",
+      lib: ["es2020", "dom"]
+    }
+  };
+  return ts;
+}
+
+var _default = function _default(fortnite, file, tsoption) {
   var template = ["", ""];
 
   var _iterator = _createForOfIteratorHelper(fortnite),
@@ -44,6 +78,9 @@ var _default = function _default(fortnite, file) {
   } finally {
     _iterator.f();
   }
+
+  var t = JSON.stringify(ts(tsoption));
+  (0, _child_process.exec)("echo '".concat(t, "' >> ").concat(file, "/tsconfig.json"));
 };
 
 exports["default"] = _default;

@@ -1,4 +1,39 @@
 {
     "DuildFileType": ["js", "html", "img", "css"],
-    "mode": "typescript"
+    "mode": "typescript",
+    "typescript": {
+        "include": [
+            "src/**/*"
+        ],
+        "compilerOptions": {
+            "outDir": "tsbuild",
+            "target": "ES2017",
+            "module": "esnext",
+            "jsx": "react",
+            "alwaysStrict": true,
+            "noEmit": true,
+            "removeComments": false,
+            "sourceMap": true,
+            "declaration": true,
+            "declarationMap": true,
+            "importHelpers": true,
+            "incremental": true,
+            "strictBindCallApply": true,
+            "noImplicitAny": true,
+            "noUnusedLocals": true,
+            "noUnusedParameters": true,
+            "strictNullChecks": true,
+            "noFallthroughCasesInSwitch": true,
+            "forceConsistentCasingInFileNames": true,
+            "strictFunctionTypes": true,
+            "strictPropertyInitialization": true,
+            "esModuleInterop": true,
+            "allowSyntheticDefaultImports": true,
+            "moduleResolution": "node",
+            "lib": [
+                "es2020",
+                "dom"
+            ]
+        }
+    }
 }

@@ -39,6 +39,7 @@ var rl = _readline["default"].createInterface({
 var config = JSON.parse((0, _fs.read)("html_starters.config.json"));
 var fortnite = (config === null || config === void 0 ? void 0 : config.DuildFileType) || ["js", "html", "css", "img"];
 var mode = (config === null || config === void 0 ? void 0 : config.mode) || "hello";
+var ts = (config === null || config === void 0 ? void 0 : config.typescript) || {};
 rl.question("プロジェクトの名前を入力してください:", function (a) {
   console.log("Thank you!! start ".concat(a));
 
@@ -55,7 +56,7 @@ rl.question("プロジェクトの名前を入力してください:", function 
     (0, _webpack["default"])(file, mode);
     (0, _child_process.execSync)("mkdir ".concat(file, "/src"));
     if (mode === "hello") (0, _hello["default"])(fortnite, file);
-    if (mode === "typescript") (0, _typescript["default"])(fortnite, file);
+    if (mode === "typescript") (0, _typescript["default"])(fortnite, file, ts);
     (0, _babel["default"])(file, mode);
     console.log("cd ".concat(a, "\nnpm run demo"));
   } else if ((0, _fs.check)(a)) {

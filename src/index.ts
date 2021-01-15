@@ -23,6 +23,7 @@ const rl = readline.createInterface({
 const config: type.RootObject = JSON.parse(read("html_starters.config.json"))
 const fortnite = config?.DuildFileType || ["js", "html", "css", "img"]
 const mode = config?.mode || "hello"
+const ts = config?.typescript || {}
 rl.question("プロジェクトの名前を入力してください:", (a: string): void =>
 {
     console.log(`Thank you!! start ${a}`)
@@ -39,7 +40,7 @@ rl.question("プロジェクトの名前を入力してください:", (a: strin
         webpack(file, mode)
         execSync(`mkdir ${file}/src`)
         if (mode === "hello") template_hello(fortnite, file)
-        if (mode === "typescript") template_typescript(fortnite, file)
+        if (mode === "typescript") template_typescript(fortnite, file, ts)
         babel(file, mode)
         console.log(`cd ${a}\nnpm run demo`);
     }
