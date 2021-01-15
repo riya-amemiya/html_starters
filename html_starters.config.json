@@ -1,3 +1,4 @@
 {
-    "DuildFileType": ["js", "html", "img", "css"]
+    "DuildFileType": ["js", "html", "img", "css"],
+    "mode": "typescript"
 }

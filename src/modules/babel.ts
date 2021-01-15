@@ -1,7 +1,17 @@
 import { exec } from "child_process"
-const babel = `
+function babel(mode: string)
+{
+    if (mode === "typescript")
+    {
+        mode = `'@babel/preset-typescript',`
+    } else
+    {
+        mode = ""
+    }
+    return `
 module.exports = {
     presets: [
+        ${mode}
         [
             '@babel/preset-env',
             {
@@ -12,10 +22,12 @@ module.exports = {
         ]
     ],
 };
-`
-export default (push: string) =>
+`;
+}
+export default (push: string, mode: string) =>
 {
-    exec(`echo "${babel}" >> ${push}/babel.config.js`, (error, stdout, stderr): void =>
+    let t = babel(mode)
+    exec(`echo "${t}" >> ${push}/babel.config.js`, (error, stdout, stderr): void =>
     {
         if (error)
         {

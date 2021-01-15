@@ -1,6 +1,6 @@
 interface RootObject
 {
     DuildFileType: string[];
-    typescript: boolean;
+    mode: "hello" | "typescript";
 }
 export { RootObject }

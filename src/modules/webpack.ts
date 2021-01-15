@@ -1,5 +1,20 @@
 import { exec } from "child_process"
-const webpack = `
+function webpack(mode: string): string
+{
+    if (mode === "typescript")
+    {
+        mode = `,
+        {
+            test: /\.ts$/,
+            use: 'ts-loader',
+            exclude: /node_module/
+        }`
+    }
+    else
+    {
+        mode = ""
+    }
+    return `
 const path = require('path');
 const outputPath = path.resolve(__dirname, 'dist');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -45,7 +60,7 @@ const webpackConfig = {
                 },
             ]
         }, {
-            test: /\.(js|jsx)$/,
+            test: /\.(js)$/,
             exclude: /node_modules/,
             use: {
                 loader: 'babel-loader', //loader名
@@ -54,7 +69,7 @@ const webpackConfig = {
                     plugins: ['@babel/plugin-transform-runtime'],
                 }
             }
-        }]
+        }${mode}]
     },
     plugins: [
         new MiniCssExtractPlugin({
@@ -83,9 +98,11 @@ Object.keys(webpackConfig.entry).forEach((key) => {
 })
 module.exports = webpackConfig
 `
-export default (push: string): void =>
+}
+export default (push: string, mode: string): void =>
 {
-    exec(`echo "${webpack}" >> ${push}/webpack.config.js`, (error, stdout, stderr): void =>
+    let t = webpack(mode)
+    exec(`echo "${t}" >> ${push}/webpack.config.js`, (error, stdout, stderr): void =>
     {
         if (error)
         {

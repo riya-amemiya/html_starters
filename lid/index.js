@@ -18,24 +18,27 @@ var _path = _interopRequireDefault(require("path"));
 
 var _package = _interopRequireDefault(require("./modules/package"));
 
+var _hello = _interopRequireDefault(require("./modules/template/hello"));
+
+var _typescript = _interopRequireDefault(require("./modules/template/typescript"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
-function _createForOfIteratorHelper(o, allowArrayLike) { var it; if (typeof Symbol === "undefined" || o[Symbol.iterator] == null) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = o[Symbol.iterator](); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
 (0, _clear["default"])();
 
 var rl = _readline["default"].createInterface({
   input: process.stdin,
   output: process.stdout
-});
+}); // const hasos = {
+//     is_windows: process.platform === 'win32',
+//     is_mac: process.platform === 'darwin',
+//     is_linux: process.platform === 'linux'
+// }
+
 
 var config = JSON.parse((0, _fs.read)("html_starters.config.json"));
 var fortnite = (config === null || config === void 0 ? void 0 : config.DuildFileType) || ["js", "html", "css", "img"];
-var template = "";
+var mode = (config === null || config === void 0 ? void 0 : config.mode) || "hello";
 rl.question("プロジェクトの名前を入力してください:", function (a) {
   console.log("Thank you!! start ".concat(a));
 
@@ -49,36 +52,11 @@ rl.question("プロジェクトの名前を入力してください:", function 
     var file = _path["default"].resolve(a);
 
     (0, _package["default"])(file, a);
-    (0, _webpack["default"])(file);
+    (0, _webpack["default"])(file, mode);
     (0, _child_process.execSync)("mkdir ".concat(file, "/src"));
-
-    var _iterator = _createForOfIteratorHelper(fortnite),
-        _step;
-
-    try {
-      for (_iterator.s(); !(_step = _iterator.n()).done;) {
-        var iterator = _step.value;
-        (0, _child_process.execSync)("mkdir ".concat(file, "/src/").concat(iterator));
-
-        if (iterator !== "img") {
-          if (iterator === "html") {
-            template = "\n<!DOCTYPE html>\n<html lang=\"ja\">\n\n<head>\n    <meta charset=\"UTF-8\">\n    <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n    <title>Hello</title>\n</head>\n\n<body>\n    <h1>Hello</h1>\n</body>\n\n</html>";
-          } else if (iterator === "js") {
-            template = "\nimport '../css/index.css'\nconsole.log('Hello')";
-          } else if (iterator === "css") {
-            template = "\nbody {\n    text-align: center;\n}";
-          }
-
-          (0, _child_process.exec)("echo \"".concat(template, "\" >> ").concat(file, "/src/").concat(iterator, "/index.").concat(iterator));
-        }
-      }
-    } catch (err) {
-      _iterator.e(err);
-    } finally {
-      _iterator.f();
-    }
-
-    (0, _babel["default"])(file);
+    if (mode === "hello") (0, _hello["default"])(fortnite, file);
+    if (mode === "typescript") (0, _typescript["default"])(fortnite, file);
+    (0, _babel["default"])(file, mode);
     console.log("cd ".concat(a, "\nnpm run demo"));
   } else if ((0, _fs.check)(a)) {
     try {
